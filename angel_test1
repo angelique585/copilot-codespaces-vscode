@@ -1,0 +1,25 @@
+def verifier_vitrage(menuiserie, a_volets, type_vitrage):
+    # Liste des vitrages de sécurité
+    vitrages_securite = ["44.6", "44,6", "442", "SP10", "SP510", "Stadip Protect", 
+                          "44.2", "retardataire d'effraction", "Vitrage blindé", 
+                          "Vitrage de sécurité", "Classe P1A à P8B", "vitrages anti-effraction"]
+    
+    # Vérifie si un vitrage de sécurité est présent dans la description
+    vitrage_securise_present = any(v in type_vitrage for v in vitrages_securite)
+
+    if not a_volets:
+        if not vitrage_securise_present:
+            return "⚠️ Attention, l’assurance requiert la présence d’un vitrage anti ou retardateur d'effraction."
+    else:
+        if vitrage_securise_present:
+            return "⚠️ Attention, double sécurité : fermeture vitrage anti-effraction."
+
+    return "✅ Aucun message requis."
+
+# Exemple d'utilisation
+menuiserie = input("Type de menuiserie : ")
+a_volets = input("Présence de volets ou grille de défense ? (Oui/Non) ").strip().lower() == "oui"
+type_vitrage = input("Type de vitrage : ")
+
+message = verifier_vitrage(menuiserie, a_volets, type_vitrage)
+print(message)
